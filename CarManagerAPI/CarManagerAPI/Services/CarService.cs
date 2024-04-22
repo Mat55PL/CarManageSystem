@@ -23,4 +23,16 @@ public class CarService
             throw new Exception("Could not retrieve cars", ex);
         }
     }
+    
+    public async Task<Car> GetCarByIdAsync(int id)
+    {
+        try
+        {
+            return (await _carDbContext.Cars.FirstOrDefaultAsync(c => c.Id == id))!;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Could not retrieve car", ex);
+        }
+    }
 }

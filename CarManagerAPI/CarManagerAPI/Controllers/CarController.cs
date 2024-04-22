@@ -28,4 +28,18 @@ public class CarController : ControllerBase
             return StatusCode(500, ex.Message);
         }
     }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetCarById(int id)
+    {
+        try
+        {
+            var car = await _carService.GetCarByIdAsync(id);
+            return Ok(car);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(204, ex.Message);
+        }
+    }
 }
