@@ -1,3 +1,4 @@
+using CarManagerAPI.Entities;
 using CarManagerAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -40,6 +41,48 @@ public class CarController : ControllerBase
         catch (Exception ex)
         {
             return StatusCode(204, ex.Message);
+        }
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> AddCar(Car car)
+    {
+        try
+        {
+            var newCar = await _carService.AddCarAsync(car);
+            return Ok(newCar);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
+    
+    [HttpPut]
+    public async Task<IActionResult> UpdateCar(Car car)
+    {
+        try
+        {
+            var updatedCar = await _carService.UpdateCarAsync(car);
+            return Ok(updatedCar);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
+    
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteCar(int id)
+    {
+        try
+        {
+            await _carService.DeleteCarAsync(id);
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
         }
     }
 }
