@@ -17,11 +17,11 @@ public class DataContext : DbContext
             .HasData(
                 new Car
                 {
-                    Id = 1, Brand = "Opel", Model = "Astra", FuelType = CarFuelType.Gasoline, Year = 2018
+                    Id = 1, Brand = "Opel", Model = "Astra", FuelType = CarFuelType.Gasoline, Year = 2018, NumberPlate = "RLA 1234"
                 },
                 new Car
                 {
-                    Id = 2, Brand = "BMW", Model = "X5", FuelType = CarFuelType.Diesel, Year = 2019
+                    Id = 2, Brand = "BMW", Model = "X5", FuelType = CarFuelType.Diesel, Year = 2019, NumberPlate = "RZ 1234"
                 });
     }
 }
