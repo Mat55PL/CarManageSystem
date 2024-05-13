@@ -18,6 +18,9 @@ public class Car
     [Range(1900, 2050)]
     public int Year { get; set; }
     [Required]
+    [Range(0, int.MaxValue)]  //int.MaxValue is the maximum value for an integer
+    public int Mileage { get; set; }
+    [Required]
     public CarFuelType FuelType { get; set; }
 }
 
