@@ -12,7 +12,7 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseMySql(connString, server));
 
 builder.Services.AddScoped<CarService>();
-
+builder.Services.AddScoped<CarInfoService>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
