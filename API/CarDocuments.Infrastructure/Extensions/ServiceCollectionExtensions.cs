@@ -1,6 +1,7 @@
 using CarDocuments.Domain.Repositories;
 using CarDocuments.Infrastructure.Persistence;
 using CarDocuments.Infrastructure.Repositories;
+using CarDocuments.Infrastructure.Seeders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,5 +17,6 @@ public static class ServiceCollectionExtensions
         services.AddDbContext<DocumentDbContext>(options => options.UseMySql(connectionString, serverVersion));
         
         services.AddScoped<IDocumentsRepository, DocumentsRepository>();
+        services.AddScoped<IDocumentSeeder, DocumentSeeder>();
     }
 }

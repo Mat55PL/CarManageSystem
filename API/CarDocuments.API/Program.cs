@@ -1,5 +1,7 @@
 using CarDocuments.Application.Extensions;
 using CarDocuments.Infrastructure.Extensions;
+using CarDocuments.Infrastructure.Seeders;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -21,6 +23,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+var scope = app.Services.CreateScope();
+
+var seeder = scope.ServiceProvider.GetRequiredService<IDocumentSeeder>();
+
+await seeder.Seed();
 
 app.UseHttpsRedirection();
 
