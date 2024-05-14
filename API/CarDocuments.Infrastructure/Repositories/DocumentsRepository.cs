@@ -18,4 +18,10 @@ internal class DocumentsRepository(DocumentDbContext dbContext) : IDocumentsRepo
         var document = await dbContext.Documents.FirstOrDefaultAsync(x => x.Id == id);
         return document;
     }
+
+    public async Task<IEnumerable<Document>> GetByCarIdAsync(int carId)
+    {
+        var documents = await dbContext.Documents.Where(x => x.CarId == carId).ToListAsync();
+        return documents;
+    }
 }

@@ -22,4 +22,14 @@ public class DocumentController(IDocumentsService documentsService) : Controller
         
         return Ok(document);
     }
+    
+    [HttpGet("Car/{carId}")]
+    public async Task<IActionResult> GetByCarId(int carId)
+    {
+        var documents = await documentsService.GetByCarId(carId);
+        if (!documents.Any())
+            return NotFound();
+        
+        return Ok(documents);
+    }
 }

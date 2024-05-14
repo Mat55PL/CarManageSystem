@@ -19,4 +19,11 @@ internal class DocumentsService(IDocumentsRepository documentsRepository, ILogge
         var document = await documentsRepository.GetByIdAsync(id);
         return document;
     }
+
+    public async Task<IEnumerable<Document>> GetByCarId(int carId)
+    {
+        logger.LogInformation("Getting documents by car id: {carId}", carId);
+        var documents = await documentsRepository.GetByCarIdAsync(carId);
+        return documents;
+    }
 }
