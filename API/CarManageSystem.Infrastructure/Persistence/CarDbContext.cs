@@ -12,7 +12,6 @@ namespace CarManageSystem.Infrastructure.Persistence
     {
         internal DbSet<Car> Cars { get; set; }
         internal DbSet<CarInfo> CarsInfo { get; set; }
-        internal DbSet<CarLicence> CarsLicences { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
