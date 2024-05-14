@@ -29,7 +29,8 @@ internal class CarSeeder(CarDbContext context) : ICarSeeder
                 Year = 2021,
                 FuelType = CarFuelType.Gasoline,
                 WheelType = TyreType.Summer,
-                NumberPlate = "ABC123"
+                NumberPlate = "ABC123",
+                Vin =   "JTNK4RBE0K3040001"
             },
             new Car
             {
@@ -38,7 +39,8 @@ internal class CarSeeder(CarDbContext context) : ICarSeeder
                 Year = 2020,
                 FuelType = CarFuelType.Diesel,
                 WheelType = TyreType.Winter,
-                NumberPlate = "DEF456"
+                NumberPlate = "DEF456",
+                Vin =   "1FADP3K2XFL000000"
             },
             new Car
             {
@@ -47,7 +49,8 @@ internal class CarSeeder(CarDbContext context) : ICarSeeder
                 Year = 2022,
                 FuelType = CarFuelType.Electric,
                 WheelType = TyreType.AllSeason,
-                NumberPlate = "GHI789"
+                NumberPlate = "GHI789",
+                Vin =   "5YJ3E1EA7KF000000"
             }
         };
         
