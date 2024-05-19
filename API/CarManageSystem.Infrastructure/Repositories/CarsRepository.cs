@@ -18,4 +18,11 @@ internal class CarsRepository(CarDbContext dbContext) : ICarsRepository
         var car = await dbContext.Cars.FirstOrDefaultAsync(x=> x.Id == id);
         return car;
     }
+
+    public async Task<int> CreateAsync(Car car)
+    {
+        dbContext.Cars.Add(car);
+        await dbContext.SaveChangesAsync();
+        return car.Id;
+    }
 }

@@ -30,7 +30,7 @@ internal class CarSeeder(CarDbContext context) : ICarSeeder
                 FuelType = CarFuelType.Gasoline,
                 WheelType = TyreType.Summer,
                 NumberPlate = "ABC123",
-                Vin =   "JTNK4RBE0K3040001"
+                Vin = "JTNK4RBE0K3040001"
             },
             new Car
             {
@@ -40,7 +40,7 @@ internal class CarSeeder(CarDbContext context) : ICarSeeder
                 FuelType = CarFuelType.Diesel,
                 WheelType = TyreType.Winter,
                 NumberPlate = "DEF456",
-                Vin =   "1FADP3K2XFL000000"
+                Vin = "1FADP3K2XFL000000"
             },
             new Car
             {
@@ -50,7 +50,7 @@ internal class CarSeeder(CarDbContext context) : ICarSeeder
                 FuelType = CarFuelType.Electric,
                 WheelType = TyreType.AllSeason,
                 NumberPlate = "GHI789",
-                Vin =   "5YJ3E1EA7KF000000"
+                Vin = "5YJ3E1EA7KF000000"
             }
         };
         
