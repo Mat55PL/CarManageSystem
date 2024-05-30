@@ -31,4 +31,16 @@ internal class FuelHistoryRepository(CarDbContext dbContext) : IFuelHistoryRepos
         await dbContext.SaveChangesAsync();
         return car.Id;
     }
+    
+    public async Task UpdateAsync(FuelHistory car)
+    {
+        dbContext.FuelHistories.Update(car);
+        await dbContext.SaveChangesAsync();
+    }
+    
+    public async Task DeleteAsync(FuelHistory car)
+    {
+        dbContext.FuelHistories.Remove(car);
+        await dbContext.SaveChangesAsync();
+    }
 }

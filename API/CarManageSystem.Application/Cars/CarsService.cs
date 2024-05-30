@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CarManageSystem.Application.Cars;
 
-internal class CarsService(ICarsRepository carsRepository, ILogger<CarsService> logger) : ICarsService
+public class CarsService(ICarsRepository carsRepository, ILogger<CarsService> logger) : ICarsService
 {
     public async Task<IEnumerable<Car>> GetAllCars()
     {
@@ -37,5 +37,29 @@ internal class CarsService(ICarsRepository carsRepository, ILogger<CarsService> 
         
         int id = await carsRepository.CreateAsync(car);
         return id;
+    }
+
+    public async Task Delete(int id)
+    {
+        logger.LogInformation("Deleting car by id: {id}", id);
+        await carsRepository.DeleteAsync(id);
+    }
+
+    public async Task Update(int id, CarDto updateCarDto)
+    {
+        logger.LogInformation("Updating car by id: {id}", id);
+        var car = new Car
+        {
+            Id = id,
+            Brand = updateCarDto.Brand,
+            Model = updateCarDto.Model,
+            Vin = updateCarDto.Vin,
+            Year = updateCarDto.Year,
+            FuelType = updateCarDto.FuelType,
+            WheelType = updateCarDto.WheelType,
+            NumberPlate = updateCarDto.NumberPlate
+        };
+        
+        await carsRepository.UpdateAsync(car);
     }
 }

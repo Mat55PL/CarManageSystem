@@ -31,4 +31,26 @@ public class CarController(ICarsService carsService) : ControllerBase
         int id = await carsService.Create(createCarDto);
         return CreatedAtAction(nameof(GetById), new { id }, null);
     }
+    
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete([FromRoute] int id)
+    {
+        var car = await carsService.GetById(id);
+        if (car is null)
+            return NotFound();
+        
+        await carsService.Delete(id);
+        return Ok();
+    }
+    
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update([FromRoute] int id, [FromBody] CarDto updateCarDto)
+    {
+        var car = await carsService.GetById(id);
+        if (car is null)
+            return NotFound();
+        
+        await carsService.Update(id, updateCarDto);
+        return Ok();
+    }
 }

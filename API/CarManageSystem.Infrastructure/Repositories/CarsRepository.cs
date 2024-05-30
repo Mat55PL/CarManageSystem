@@ -25,4 +25,17 @@ internal class CarsRepository(CarDbContext dbContext) : ICarsRepository
         await dbContext.SaveChangesAsync();
         return car.Id;
     }
+
+    public Task DeleteAsync(int id)
+    {
+        var car = new Car { Id = id };
+        dbContext.Cars.Remove(car);
+        return dbContext.SaveChangesAsync();
+    }
+
+    public async Task UpdateAsync(Car car)
+    {
+        dbContext.Cars.Update(car);
+        await dbContext.SaveChangesAsync();
+    }
 }

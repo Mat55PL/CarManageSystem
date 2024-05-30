@@ -45,4 +45,37 @@ public class CarsFuelHistoryService(IFuelHistoryRepository fuelHistoryRepository
         await fuelHistoryRepository.CreateAsync(fuelHistory);
         return fuelHistory;
     }
+
+    public async Task UpdateFuelHistoryAsync(int id, FuelHistoryDto fuelHistoryDto)
+    {
+        logger.LogInformation("Updating fuel history for id {Id}", fuelHistoryDto.Id);
+        var existingFuelHistory = await fuelHistoryRepository.GetByIdAsync(fuelHistoryDto.Id);
+        if (existingFuelHistory == null)
+        {
+            throw new KeyNotFoundException($"Fuel history with id {fuelHistoryDto.Id} not found.");
+        }
+
+        existingFuelHistory.CarId = fuelHistoryDto.CarId;
+        existingFuelHistory.FuelAmount = fuelHistoryDto.FuelAmount;
+        existingFuelHistory.FuelType = fuelHistoryDto.FuelType;
+        existingFuelHistory.Odometer = fuelHistoryDto.Odometer;
+        existingFuelHistory.Cost = fuelHistoryDto.Cost;
+        existingFuelHistory.Location = fuelHistoryDto.Location;
+        existingFuelHistory.Note = fuelHistoryDto.Note;
+        existingFuelHistory.Date = fuelHistoryDto.Date;
+
+        await fuelHistoryRepository.UpdateAsync(existingFuelHistory);
+    }
+
+    public async Task DeleteFuelHistoryAsync(int id)
+    {
+        logger.LogInformation("Deleting fuel history for id {Id}", id);
+        var existingFuelHistory = await fuelHistoryRepository.GetByIdAsync(id);
+        if (existingFuelHistory == null)
+        {
+            throw new KeyNotFoundException($"Fuel history with id {id} not found.");
+        }
+
+        await fuelHistoryRepository.DeleteAsync(existingFuelHistory);
+    }
 }

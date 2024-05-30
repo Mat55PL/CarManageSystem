@@ -41,4 +41,26 @@ public class CarInfoController(ICarsInfoService carsInfoService) : ControllerBas
         int id = await carsInfoService.CreateCarInfoAsync(createCarInfoDto);
         return CreatedAtAction(nameof(GetById), new { id }, null);
     }
+    
+    [HttpDelete]
+    public async Task<IActionResult> Delete([FromRoute] int id)
+    {
+        var carInfo = await carsInfoService.GetCarInfoByIdAsync(id);
+        if (carInfo is null)
+            return NotFound();
+        
+        await carsInfoService.DeleteCarInfoAsync(id);
+        return Ok();
+    }
+    
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update([FromRoute] int id, [FromBody] CarInfoDto carInfoDto)
+    {
+        var carInfo = await carsInfoService.GetCarInfoByIdAsync(id);
+        if (carInfo is null)
+            return NotFound();
+        
+        await carsInfoService.UpdateCarInfoAsync(id, carInfoDto);
+        return Ok();
+    }
 }

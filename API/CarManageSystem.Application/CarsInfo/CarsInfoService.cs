@@ -28,6 +28,27 @@ public class CarsInfoService(ICarInfoRepository carInfoRepository, ILogger<CarsI
         return carInfo;
     }
 
+    public async Task DeleteCarInfoAsync(int id)
+    {
+        logger.LogInformation("Deleting car info by id {id}", id);
+        await carInfoRepository.DeleteAsync(id);
+    }
+
+    public async Task UpdateCarInfoAsync(int id, CarInfoDto carInfoDto)
+    {
+        logger.LogInformation("Updating car info by id {id}", id);
+        var carInfo = new CarInfo
+        {
+            Id = id,
+            CarId = carInfoDto.CarId,
+            InspectionDate = carInfoDto.InspectionDate,
+            InsuranceDate = carInfoDto.InsuranceDate,
+            OilChangeDate = carInfoDto.OilChangeDate,
+            TireChangeDate = carInfoDto.TireChangeDate
+        };
+        await carInfoRepository.UpdateAsync(id, carInfo);
+    }
+
     public async Task<int> CreateCarInfoAsync(CreateCarInfoDto carInfoDto)
     {
         logger.LogInformation("Creating car info");

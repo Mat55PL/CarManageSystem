@@ -9,4 +9,6 @@ public interface ICarsFuelHistoryService
     Task<FuelHistory?> GetFuelHistoryByIdAsync(int id);
     Task<IEnumerable<FuelHistory>> GetFuelHistoryByCarIdAsync(int carId);
     Task<FuelHistory> AddFuelHistoryAsync(CreateFuelHistoryDto createFuelHistoryDto);
+    Task UpdateFuelHistoryAsync(int id, FuelHistoryDto fuelHistoryDto);
+    Task DeleteFuelHistoryAsync(int id);
 }

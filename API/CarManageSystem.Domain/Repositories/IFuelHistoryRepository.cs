@@ -8,4 +8,6 @@ public interface IFuelHistoryRepository
     Task<IEnumerable<FuelHistory>> GetByCarIdAsync(int carId);
     Task<FuelHistory?> GetByIdAsync(int id);
     Task<int> CreateAsync(FuelHistory car);
+    Task UpdateAsync(FuelHistory car);
+    Task DeleteAsync(FuelHistory car);
 }

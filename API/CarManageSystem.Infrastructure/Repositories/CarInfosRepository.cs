@@ -31,4 +31,28 @@ internal class CarInfosRepository(CarDbContext dbContext) : ICarInfoRepository
         await dbContext.SaveChangesAsync();
         return carInfo.Id;
     }
+
+    public async Task DeleteAsync(int id)
+    {
+        var carInfo = await dbContext.CarsInfo.FirstOrDefaultAsync(car => car.Id == id);
+        if (carInfo is not null)
+        {
+            dbContext.CarsInfo.Remove(carInfo);
+            await dbContext.SaveChangesAsync();
+        }
+    }
+
+    public async Task UpdateAsync(int id, CarInfo car)
+    {
+        var carInfo = await dbContext.CarsInfo.FirstOrDefaultAsync(car => car.Id == id);
+        if (carInfo is not null)
+        {
+            carInfo.CarId = car.CarId;
+            carInfo.InspectionDate = car.InspectionDate;
+            carInfo.InsuranceDate = car.InsuranceDate;
+            carInfo.OilChangeDate = car.OilChangeDate;
+            carInfo.TireChangeDate = car.TireChangeDate;
+            await dbContext.SaveChangesAsync();
+        }
+    }
 }
