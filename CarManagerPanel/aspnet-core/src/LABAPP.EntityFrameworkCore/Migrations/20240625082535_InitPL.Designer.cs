@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LABAPP.Migrations
 {
     [DbContext(typeof(LABAPPDbContext))]
-    [Migration("20240409195357_Init")]
-    partial class Init
+    [Migration("20240625082535_InitPL")]
+    partial class InitPL
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
