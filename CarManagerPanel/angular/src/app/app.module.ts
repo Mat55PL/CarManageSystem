@@ -14,6 +14,7 @@ import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module
 import { SharedModule } from '@shared/shared.module';
 import { HomeComponent } from '@app/home/home.component';
 import { AboutComponent } from '@app/about/about.component';
+
 // tenants
 import { TenantsComponent } from '@app/tenants/tenants.component';
 import { CreateTenantDialogComponent } from './tenants/create-tenant/create-tenant-dialog.component';
@@ -40,6 +41,9 @@ import { SidebarUserPanelComponent } from './layout/sidebar-user-panel.component
 import { SidebarMenuComponent } from './layout/sidebar-menu.component';
 import { ApiComponent } from './api/api.component';
 
+//cars 
+import { CarsComponent } from './cars/cars.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,6 +64,8 @@ import { ApiComponent } from './api/api.component';
     EditUserDialogComponent,
     ChangePasswordComponent,
     ResetPasswordDialogComponent,
+    //cars
+    CarsComponent,
     // layout
     HeaderComponent,
     HeaderLeftNavbarComponent,
@@ -69,7 +75,7 @@ import { ApiComponent } from './api/api.component';
     SidebarComponent,
     SidebarLogoComponent,
     SidebarUserPanelComponent,
-    SidebarMenuComponent
+    SidebarMenuComponent    
   ],
   imports: [
     CommonModule,
