@@ -11,13 +11,12 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(
-        corsPolicyBuilder =>
-        {
-            corsPolicyBuilder.WithOrigins("http://localhost:4200")
-                .AllowAnyHeader()
-                .AllowAnyMethod();
-        });
+    options.AddPolicy("AllowAll", build =>
+    {
+        build.AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
 });
 
 builder.Services.AddControllers();
@@ -41,7 +40,7 @@ var seeder = scope.ServiceProvider.GetRequiredService<ICarSeeder>();
 await seeder.Seed();
 // Configure the HTTP request pipeline.
 
-
+app.UseCors("AllowAll");
 
 app.UseHttpsRedirection();
 
