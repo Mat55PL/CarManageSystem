@@ -4,7 +4,7 @@ using CarManageSystem.Application.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.WebHost.UseUrls("http://mattu.bieda.it:40076", "https://mattu.bieda.it:40076");
+//builder.WebHost.UseUrls("http://mattu.bieda.it:40076", "https://mattu.bieda.it:40076");
 // Add services to the container.
 
 builder.Services.AddEndpointsApiExplorer();
