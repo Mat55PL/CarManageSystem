@@ -4,6 +4,7 @@ using CarManageSystem.Application.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.WebHost.UseUrls("http://0.0.0.0:30177", "https://0.0.0.0:30177");
 // Add services to the container.
 
 builder.Services.AddEndpointsApiExplorer();
