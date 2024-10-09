@@ -18,7 +18,11 @@ public enum CarFuelType
     Gasoline,
     Diesel,
     Electric,
-    Hybrid
+    Hybrid,
+    LPG,
+    CNG,
+    Hydrogen,
+    Other,
 }
 
 public enum TyreType
