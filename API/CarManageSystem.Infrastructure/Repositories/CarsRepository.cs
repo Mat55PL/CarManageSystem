@@ -15,7 +15,9 @@ internal class CarsRepository(CarDbContext dbContext) : ICarsRepository
 
     public async Task<Car?> GetByIdAsync(int id)
     {
-        var car = await dbContext.Cars.FirstOrDefaultAsync(x=> x.Id == id);
+        var car = await dbContext.Cars
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x=> x.Id == id);
         return car;
     }
 
