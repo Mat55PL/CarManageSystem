@@ -1,6 +1,7 @@
 using CarManageSystem.Infrastructure.Extensions;
 using CarManageSystem.Infrastructure.Seeders;
 using CarManageSystem.Application.Extensions;
+using CarManageSystem.Domain.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
