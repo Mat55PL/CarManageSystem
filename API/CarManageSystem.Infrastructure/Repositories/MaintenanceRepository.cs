@@ -9,7 +9,9 @@ internal class MaintenanceRepository(CarDbContext dbContext) : IMaintenanceRepos
 {
     public async Task<IEnumerable<Maintenance>> GetAllAsync()
     {
-        var maintenances = await dbContext.Maintenances.ToListAsync();
+        var maintenances = await dbContext.Maintenances
+            .Include(m => m.MaintenanceItems)
+            .ToListAsync();
         return maintenances;
     }
 

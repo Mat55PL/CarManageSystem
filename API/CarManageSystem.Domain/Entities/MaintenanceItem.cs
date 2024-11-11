@@ -8,5 +8,5 @@ public class MaintenanceItem
     public string Description { get; set; } = string.Empty;
     public decimal Cost { get; set; }
     
-    public Maintenance Maintenance { get; set; }
+    public Maintenance? Maintenance { get; set; }
 }
