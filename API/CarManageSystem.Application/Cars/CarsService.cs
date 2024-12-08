@@ -9,14 +9,14 @@ public class CarsService(ICarsRepository carsRepository, ILogger<CarsService> lo
 {
     public async Task<IEnumerable<Car>> GetAllCars()
     {
-        logger.LogInformation("Getting all cars");
+        logger.LogInformation("Getting all cars on datetime: {datetime}", DateTime.Now);
         var cars = await carsRepository.GetAllAsync();
         return cars;
     }
 
     public async Task<Car?> GetById(int id)
     {
-        logger.LogInformation("Getting car by id: {id}", id);
+        logger.LogInformation("Getting car by id: {id} on datetime: {datetime}", id, DateTime.Now);
         var car = await carsRepository.GetByIdAsync(id);
         return car;
     }
