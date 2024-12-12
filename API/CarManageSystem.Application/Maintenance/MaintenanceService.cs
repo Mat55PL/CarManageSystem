@@ -9,7 +9,7 @@ public class MaintenanceService(IMaintenanceRepository maintenanceRepository, IL
 {
     public async Task<IEnumerable<MaintenanceDto>> GetAllMaintenanceAsync()
     {
-        logger.LogInformation("Getting all maintenance");
+        logger.LogInformation("Getting all maintenance at {DateTime}", DateTime.Now);
         var maintenances = await maintenanceRepository.GetAllAsync();
         
         var maintenanceDtos = maintenances.Select(maintenance => new MaintenanceDto
@@ -32,7 +32,7 @@ public class MaintenanceService(IMaintenanceRepository maintenanceRepository, IL
 
     public async Task<MaintenanceDto?> GetMaintenanceByIdAsync(int id)
     {
-        logger.LogInformation("Getting maintenance by id {Id}", id);
+        logger.LogInformation("Getting maintenance by id {Id} at {datetime}", id, DateTime.Now);
         var maintenance = await maintenanceRepository.GetByIdAsync(id);
         if (maintenance == null)
             return null;
@@ -57,7 +57,7 @@ public class MaintenanceService(IMaintenanceRepository maintenanceRepository, IL
 
     public async Task<IEnumerable<MaintenanceDto>> GetMaintenanceByCarIdAsync(int carId)
     {
-        logger.LogInformation("Getting maintenance by car id {CarId}", carId);
+        logger.LogInformation("Getting maintenance by car id {CarId} at {datetime}", carId, DateTime.Now);
         var maintenances = await maintenanceRepository.GetByCarIdAsync(carId);
         
         var maintenanceDtos = maintenances.Select(maintenance => new MaintenanceDto
