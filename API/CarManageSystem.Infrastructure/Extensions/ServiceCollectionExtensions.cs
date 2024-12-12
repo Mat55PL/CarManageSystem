@@ -20,5 +20,6 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ICarsRepository, CarsRepository>();
         services.AddScoped<IFuelHistoryRepository, FuelHistoryRepository>();
         services.AddScoped<ICarInfoRepository, CarInfosRepository>();
+        services.AddScoped<IMaintenanceRepository, MaintenanceRepository>();
     }
 }

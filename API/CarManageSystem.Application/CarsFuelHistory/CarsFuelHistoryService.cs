@@ -9,28 +9,28 @@ public class CarsFuelHistoryService(IFuelHistoryRepository fuelHistoryRepository
 {
     public async Task<IEnumerable<FuelHistory>> GetAllFuelHistoryAsync()
     {
-        logger.LogInformation("Getting all fuel history");
+        logger.LogInformation("Getting all fuel history at {DateTime}", DateTime.Now);
         var fuelHistory = await fuelHistoryRepository.GetAllAsync();
         return fuelHistory;
     }
 
     public async Task<FuelHistory?> GetFuelHistoryByIdAsync(int id)
     {
-        logger.LogInformation("Getting fuel history by id {Id}", id);
+        logger.LogInformation("Getting fuel history by id {Id} at {datetime}", id, DateTime.Now);
         var fuelHistory = await fuelHistoryRepository.GetByIdAsync(id);
         return fuelHistory;
     }
 
     public async Task<IEnumerable<FuelHistory>> GetFuelHistoryByCarIdAsync(int carId)
     {
-        logger.LogInformation("Getting fuel history by car id {CarId}", carId);
+        logger.LogInformation("Getting fuel history by car id {CarId} at {datetime}", carId, DateTime.Now);
         var fuelHistory = await fuelHistoryRepository.GetByCarIdAsync(carId);
         return fuelHistory;
     }
 
     public async Task<FuelHistory> AddFuelHistoryAsync(CreateFuelHistoryDto createFuelHistoryDto)
     {
-        logger.LogInformation("Adding fuel history for car id {CarId}", createFuelHistoryDto.CarId);
+        logger.LogInformation("Adding fuel history for car id {CarId} at {datetime}", createFuelHistoryDto.CarId, DateTime.Now);
         var fuelHistory = new FuelHistory
         {
             CarId = createFuelHistoryDto.CarId,
@@ -48,7 +48,7 @@ public class CarsFuelHistoryService(IFuelHistoryRepository fuelHistoryRepository
 
     public async Task UpdateFuelHistoryAsync(int id, FuelHistoryDto fuelHistoryDto)
     {
-        logger.LogInformation("Updating fuel history for id {Id}", fuelHistoryDto.Id);
+        logger.LogInformation("Updating fuel history for id {Id} at {datetime}", fuelHistoryDto.Id, DateTime.Now);
         var existingFuelHistory = await fuelHistoryRepository.GetByIdAsync(fuelHistoryDto.Id);
         if (existingFuelHistory == null)
         {
@@ -69,7 +69,7 @@ public class CarsFuelHistoryService(IFuelHistoryRepository fuelHistoryRepository
 
     public async Task DeleteFuelHistoryAsync(int id)
     {
-        logger.LogInformation("Deleting fuel history for id {Id}", id);
+        logger.LogInformation("Deleting fuel history for id {Id} at {datetime}", id, DateTime.Now);
         var existingFuelHistory = await fuelHistoryRepository.GetByIdAsync(id);
         if (existingFuelHistory == null)
         {
