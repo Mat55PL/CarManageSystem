@@ -23,7 +23,7 @@ public class CarsService(ICarsRepository carsRepository, ILogger<CarsService> lo
 
     public async Task<int> Create(CreateCarDto createCarDto)
     {
-        logger.LogInformation("Creating car");
+        logger.LogInformation("Creating car on datetime: {datetime}", DateTime.Now);
         var car = new Car
         {
             Brand = createCarDto.Brand,
@@ -41,13 +41,13 @@ public class CarsService(ICarsRepository carsRepository, ILogger<CarsService> lo
 
     public async Task Delete(int id)
     {
-        logger.LogInformation("Deleting car by id: {id}", id);
+        logger.LogInformation("Deleting car by id: {id} at {datetime}", id, DateTime.Now);
         await carsRepository.DeleteAsync(id);
     }
 
     public async Task Update(int id, CarDto updateCarDto)
     {
-        logger.LogInformation("Updating car by id: {id}", id);
+        logger.LogInformation("Updating car by id: {id} at {datetime}", id, DateTime.Now);
         var car = new Car
         {
             Id = id,
