@@ -35,6 +35,14 @@ namespace CarManageSystem.Infrastructure.Seeders
                     _context.Maintenances.AddRange(maintenances);
                     await _context.SaveChangesAsync();
                 }
+                
+                // Seedowanie tankowań
+                if (!await _context.FuelHistories.AnyAsync())
+                {
+                    var fuelHistories = GetFuelHistory();
+                    _context.FuelHistories.AddRange(fuelHistories);
+                    await _context.SaveChangesAsync();
+                }
             }
         }
 
@@ -75,6 +83,66 @@ namespace CarManageSystem.Infrastructure.Seeders
             };
             
             return cars;
+        }
+
+        private IEnumerable<FuelHistory> GetFuelHistory()
+        {
+            var cars = _context.Cars.ToList();
+            
+            List<FuelHistory> fuelHistories = new();
+            
+            foreach (var car in cars)
+            {
+                if((car.Id % 2) == 0)
+                {
+                    var fuelHistory = new FuelHistory
+                    {
+                        CarId = car.Id,
+                        Date = DateTime.Now.AddMonths(-6),
+                        FuelAmount = 40.0,
+                        Cost = 100.00m,
+                        Odometer = 10000,
+                        FuelType = car.FuelType,
+                        Location = "Warsaw",
+                        Note = "Regular fuel refill."
+                    };
+                    
+                    fuelHistories.Add(fuelHistory);
+                }
+                else
+                {
+                    var fuelHistory = new FuelHistory
+                    {
+                        CarId = car.Id,
+                        Date = DateTime.Now.AddMonths(-6),
+                        FuelAmount = 40.0,
+                        Cost = 100.00m,
+                        Odometer = 10000,
+                        FuelType = car.FuelType,
+                        Location = "Kraków",
+                        Note = $"Tankowanie pojazdu dla id {car.Id}."
+                    };
+                    
+                    fuelHistories.Add(fuelHistory);
+                    
+                    var fuelHistory2 = new FuelHistory
+                    {
+                        CarId = car.Id,
+                        Date = DateTime.Now.AddMonths(-4),
+                        FuelAmount = 40.0,
+                        Cost = 100.00m,
+                        Odometer = 15000,
+                        FuelType = car.FuelType,
+                        Location = "Rzeszów",
+                        Note = $"Tankowanie pojazdu dla id {car.Id}."
+                    };
+                    
+                    fuelHistories.Add(fuelHistory2);
+                }
+                
+            }
+            
+            return fuelHistories;
         }
 
         private IEnumerable<Maintenance> GetMaintenances()
