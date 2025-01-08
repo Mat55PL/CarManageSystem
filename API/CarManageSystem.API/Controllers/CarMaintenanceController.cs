@@ -35,4 +35,18 @@ public class CarMaintenanceController(IMaintenanceService maintenanceService) : 
         return Ok(maintenance);
     }
     
+    [HttpPost] // api/carMaintenance
+    public async Task<IActionResult> Create([FromBody] MaintenanceCreateDto maintenanceCreateDto)
+    {
+        int id = await maintenanceService.CreateMaintenanceAsync(maintenanceCreateDto);
+        return CreatedAtAction(nameof(GetById), new { id }, null);
+    }
+    
+    [HttpPost("{maintenanceId}/maintenanceItem")] // api/carMaintenance/{maintenanceId}/maintenanceItem
+    public async Task<IActionResult> AddMaintenanceItem([FromRoute] int maintenanceId, [FromBody] MaintenanceItemCreateDto maintenanceItemCreateDto)
+    {
+        var maintenanceItem = await maintenanceService.AddMaintenanceItemAsync(maintenanceId, maintenanceItemCreateDto);
+        return CreatedAtAction(nameof(GetById), new { id = maintenanceItem.MaintenanceId }, null);
+    }
+    
 }
