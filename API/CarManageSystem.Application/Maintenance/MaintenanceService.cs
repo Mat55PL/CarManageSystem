@@ -1,3 +1,4 @@
+using CarManageSystem.Application.Cars;
 using CarManageSystem.Application.Maintenance.Dtos;
 using CarManageSystem.Domain.Entities;
 using CarManageSystem.Domain.Repositories;
@@ -80,6 +81,7 @@ public class MaintenanceService(IMaintenanceRepository maintenanceRepository, IL
 
     public async Task<int> CreateMaintenanceAsync(MaintenanceCreateDto maintenanceCreateDto)
     {
+        logger.LogInformation("Create maintenance at {DateTime} for carid {CarID}", DateTime.Now, maintenanceCreateDto.CarId);
         var maintenance = new Domain.Entities.Maintenance
         {
             CarId = maintenanceCreateDto.CarId,
@@ -98,7 +100,8 @@ public class MaintenanceService(IMaintenanceRepository maintenanceRepository, IL
         var maintenance = await maintenanceRepository.GetByIdAsync(maintenanceId);
         if (maintenance == null)
             throw new KeyNotFoundException("Maintenance not found");
-
+        
+        logger.LogInformation("Update maintenance at {DateTime} for maintenanceId {MaintenanceId}", DateTime.Now, maintenanceId);
         // Aktualizacja właściwości
         maintenance.MaintenanceDate = maintenanceUpdateDto.MaintenanceDate;
         maintenance.Description = maintenanceUpdateDto.Description;
