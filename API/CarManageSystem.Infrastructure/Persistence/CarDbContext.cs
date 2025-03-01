@@ -17,6 +17,7 @@ namespace CarManageSystem.Infrastructure.Persistence
         internal DbSet<Inspection> Inspections { get; set; }
         internal DbSet<Maintenance> Maintenances { get; set; }
         internal DbSet<MaintenanceItem> MaintenanceItems { get; set; }
+        internal DbSet<CarUsageHistory> CarUsageHistories { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Konfiguracja relacji Car - Maintenance

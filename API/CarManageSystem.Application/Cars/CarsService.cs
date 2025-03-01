@@ -21,6 +21,13 @@ public class CarsService(ICarsRepository carsRepository, ILogger<CarsService> lo
         return car;
     }
 
+    public async Task<IEnumerable<CarUsageHistory>> GetCarUsageHistory(int carId)
+    {
+        logger.LogInformation("Getting car usage history by carId: {carId} on datetime: {datetime}", carId, DateTime.Now);
+        var usageHistory = await carsRepository.GetCarUsageHistoryAsync(carId);
+        return usageHistory;
+    }
+
     public async Task<int> Create(CreateCarDto createCarDto)
     {
         logger.LogInformation("Creating car on datetime: {datetime}", DateTime.Now);
@@ -61,5 +68,11 @@ public class CarsService(ICarsRepository carsRepository, ILogger<CarsService> lo
         };
         
         await carsRepository.UpdateAsync(car);
+    }
+
+    public async Task UpdateCarCurrentUserId(int carId, string userId)
+    {
+        logger.LogInformation("Updating car current user {userId} with id {id} at [{datetime}]", userId, carId, DateTime.Now);
+        await carsRepository.UpdateCarCurrentUserIdAsync(carId, userId);
     }
 }

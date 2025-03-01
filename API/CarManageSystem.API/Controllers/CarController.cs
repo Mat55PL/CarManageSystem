@@ -25,6 +25,13 @@ public class CarController(ICarsService carsService) : ControllerBase
         return Ok(car);
     }
     
+    [HttpGet("usage-history/{carId}")]
+    public async Task<IActionResult> GetCarUsageHistory([FromRoute] int carId)
+    {
+        var usageHistory = await carsService.GetCarUsageHistory(carId);
+        return Ok(usageHistory);
+    }
+    
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateCarDto createCarDto)
     {
@@ -51,6 +58,13 @@ public class CarController(ICarsService carsService) : ControllerBase
             return NotFound();
         
         await carsService.Update(id, updateCarDto);
+        return Ok();
+    }
+    
+    [HttpPut("{carId}/current-user")]
+    public async Task<IActionResult> UpdateCarCurrentUserId([FromRoute] int carId, [FromBody] string userId)
+    {
+        await carsService.UpdateCarCurrentUserId(carId, userId);
         return Ok();
     }
 }

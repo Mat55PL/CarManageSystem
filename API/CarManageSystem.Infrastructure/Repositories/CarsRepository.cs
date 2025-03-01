@@ -20,6 +20,14 @@ internal class CarsRepository(CarDbContext dbContext) : ICarsRepository
             .FirstOrDefaultAsync(x=> x.Id == id);
         return car;
     }
+    
+    public async Task<IEnumerable<CarUsageHistory>> GetCarUsageHistoryAsync(int carId)
+    {
+        var usageHistory = await dbContext.CarUsageHistories
+            .Where(x => x.CarId == carId)
+            .ToListAsync();
+        return usageHistory;
+    }
 
     public async Task<int> CreateAsync(Car car)
     {
@@ -38,6 +46,27 @@ internal class CarsRepository(CarDbContext dbContext) : ICarsRepository
     public async Task UpdateAsync(Car car)
     {
         dbContext.Cars.Update(car);
+        await dbContext.SaveChangesAsync();
+    }
+    
+    public async Task UpdateCarCurrentUserIdAsync(int carId, string userId)
+    {
+        var car = await dbContext.Cars.FindAsync(carId);
+        if (car == null)
+        {
+            throw new Exception($"CarId {carId} not found");
+        }
+        
+        var usageHistory = new CarUsageHistory
+        {
+            CarId = carId,
+            UserId = userId,
+            StartDate = DateTime.Now
+        };
+        
+        dbContext.CarUsageHistories.Add(usageHistory);
+        
+        car.CurrentUserId = userId;
         await dbContext.SaveChangesAsync();
     }
 }
