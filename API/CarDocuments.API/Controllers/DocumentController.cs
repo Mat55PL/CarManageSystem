@@ -1,4 +1,5 @@
 using CarDocuments.Application.Documents;
+using CarDocuments.Application.Documents.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarDocuments.API.Controllers;
@@ -31,5 +32,23 @@ public class DocumentController(IDocumentsService documentsService) : Controller
             return NotFound();
         
         return Ok(documents);
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> Create([FromBody] CreateDocumentDto documentCreateDto)
+    {
+        return Ok("Document created");
+    }
+    
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateDocumentDto documentUpdateDto)
+    {
+        return Ok("Document updated");
+    }
+    
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete([FromRoute] int id)
+    {
+        return Ok("Document deleted");
     }
 }
