@@ -49,4 +49,34 @@ public class CarMaintenanceController(IMaintenanceService maintenanceService) : 
         return CreatedAtAction(nameof(GetById), new { id = maintenanceItem.MaintenanceId }, null);
     }
     
+    [HttpPut("{id}")] // api/carMaintenance/{id}
+    public async Task<IActionResult> Update([FromRoute] int id, [FromBody] MaintenanceUpdateDto maintenanceUpdateDto)
+    {
+        await maintenanceService.UpdateMaintenanceAsync(id, maintenanceUpdateDto);
+        if (maintenanceUpdateDto is null)
+            return NotFound();
+
+        return Ok();
+    }
+    
+    [HttpPut("{maintenanceId}/maintenanceItem/{maintenanceItemId}")] // api/carMaintenance/{maintenanceId}/maintenanceItem/{maintenanceItemId}
+    public async Task<IActionResult> UpdateMaintenanceItem([FromRoute] int maintenanceId, [FromRoute] int maintenanceItemId, [FromBody] MaintenanceItemUpdateDto maintenanceItemUpdateDto)
+    {
+        await maintenanceService.UpdateMaintenanceItemAsync(maintenanceId, maintenanceItemUpdateDto);
+        if (maintenanceItemUpdateDto is null)
+            return NotFound();
+
+        return Ok();
+    }
+    
+    [HttpDelete("{id}")] // api/carMaintenance/{id}
+    public async Task<IActionResult> Delete([FromRoute] int id)
+    {
+        var result = await maintenanceService.DeleteMaintenanceAsync(id);
+        if (!result)
+            return NotFound();
+
+        return NoContent();
+    }
+    
 }
